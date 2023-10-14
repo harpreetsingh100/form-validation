@@ -17,6 +17,10 @@ function App() {
       type: "text",
       placeholder: "Username",
       label: "Username",
+      errorMessage:
+        "Username should be 3-16 characters and shouldn't include any special character!",
+      required: true,
+      pattern: "^[A-Za-z0-9]{3,16}$",
     },
     {
       id: 2,
@@ -24,11 +28,13 @@ function App() {
       type: "email",
       placeholder: "Email",
       label: "Email",
+      errorMessage: "It should be a valid email address!",
+      required: true,
     },
     {
       id: 3,
       name: "birthday",
-      type: "text",
+      type: "date",
       placeholder: "Birthday",
       label: "Birthday",
     },
@@ -38,6 +44,10 @@ function App() {
       type: "password",
       placeholder: "Password",
       label: "Password",
+      errorMessage:
+        "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+      required: true,
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
     },
     {
       id: 5,
@@ -45,6 +55,9 @@ function App() {
       type: "password",
       placeholder: "Confirm Password",
       label: "Confirm Password",
+      errorMessage: "Passwords dont match!",
+      required: true,
+      pattern: values.password,
     },
   ];
 
@@ -59,9 +72,9 @@ function App() {
   console.log(values);
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-gray-500">
-      <form className="border-4 border-black p-5 rounded-xl">
-        <h1 className="text-2xl text-center mb-3">Register</h1>
+    <div className="h-screen w-screen flex items-center justify-center bg-purple-600">
+      <form className="shadow-2xl p-5 rounded-xl w-1/3 bg-white">
+        <h1 className="text-2xl text-center mb-3 text-purple-600">Register</h1>
         {inputs.map((input) => {
           return (
             <FormInput
@@ -74,7 +87,7 @@ function App() {
         })}
         <button
           onClick={handleSubmit}
-          className="text-center w-full px-3 py-2 rounded-lg font-xl cursor-pointer my-3 border-4 border-black">
+          className="text-center w-full px-3 py-2 rounded-lg font-xl cursor-pointer my-3 bg-purple-600 ">
           Submit
         </button>
       </form>

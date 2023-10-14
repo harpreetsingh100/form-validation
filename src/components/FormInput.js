@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FormInput = (props) => {
-  const { label, errorMessage, onChange, ...input } = props;
+  const [focused, setFocused] = useState(false);
+  const { label, errorMessage, onChange, ...inputProps } = props;
+
+  const handleFocus = (e) => {
+    setFocused(true);
+  };
   return (
-    <div className="flex flex-col w-[300px]">
-      <label>{props.label}</label>
+    <div className="flex flex-col w-full">
+      <label className="text-lg">{props.label}</label>
       <input
-        {...input}
+        {...inputProps}
         onChange={onChange}
-        className="p-3 mt-3 rounded-lg my-2"
+        className="p-3 mt-3 rounded-lg my-2 border-2"
+        onBlur={handleFocus}
+        focused={focused.toString()}
+        onFocus={() =>
+          inputProps.name === "confirmPassword" && setFocused(true)
+        }
       />
-      <span></span>
+      <span className="text-sm text-red-500 hidden">{errorMessage}</span>
     </div>
   );
 };
